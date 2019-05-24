@@ -1,0 +1,341 @@
+ESX = nil
+local PlayerData                = {}
+local UI_MOUSE_FOCUS = false
+local USER_DOCUMENTS = {}
+local fontId
+local CURRENT_DOCUMENT = nil
+
+local MENU_OPTIONS = {
+    x = 0.5,
+    y = 0.2,
+    width = 0.5,
+    height = 0.04,
+    scale = 0.4,
+    font = fontId,
+    menu_title = "Form Actions",
+    menu_subtitle = "ΕΠΙΛΟΓΕΣ",
+    color_r = 0,
+    color_g = 128,
+    color_b = 255,
+}
+
+
+Citizen.CreateThread(function()
+	while ESX == nil do
+		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+		Citizen.Wait(0)
+	end
+    while ESX.IsPlayerLoaded == false do
+        Citizen.Wait(10)
+    end
+
+    PlayerData = ESX.GetPlayerData()
+
+
+    if Config.UseCustomFonts == true then
+        RegisterFontFile(Config.CustomFontFile)
+        fontId = RegisterFontId(Config.CustomFontId)
+        MENU_OPTIONS.font = fontId
+    else 
+        MENU_OPTIONS.font = 2
+    end
+    
+
+    GetAllUserForms()
+    SetNuiFocus(false, false)
+
+end)
+
+Citizen.CreateThread(function()
+
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+       
+        if UI_MOUSE_FOCUS == true then
+
+            --[[
+            if IsControlJustReleased(0, 142) then -- MeleeAttackAlternate
+                --SendNUIMessage({type = "click"})
+                
+            end
+            --]]
+        end
+    
+        if IsControlJustReleased(0, Config.MenuKey)  then
+            print("WTFFFF???")
+            Menu.hidden = false
+            OpenMainMenu()
+            
+            --[[
+            SetNuiFocus(true, true)
+			SendNUIMessage({
+        		type = "ShowDocument",
+        		enable = true
+   			})
+            UI_MOUSE_FOCUS = true
+            --]]
+
+    	end
+
+        Menu.renderGUI(MENU_OPTIONS)
+    end
+ end)
+
+function OpenMainMenu()
+    ClearMenu()
+    Menu.addButton("Public Documents", "OpenNewPublicFormMenu", nil)
+    Menu.addButton("Job Documents", "OpenNewJobFormMenu", nil)
+    Menu.addButton("Saved Documents", "OpenMyDocumentsMenu", nil)
+    Menu.addButton("Close","CloseMenu",nil) 
+    Menu.hidden = false
+end
+
+function CopyFormToPlayer(aPlayer)
+    --TriggerServerEvent('esx_documents:CopyToPlayer', GetPlayerServerId(player), aDocument)
+    TriggerServerEvent('esx_documents:CopyToPlayer', aPlayer, CURRENT_DOCUMENT)
+    CURRENT_DOCUMENT = nil;
+    CloseMenu()
+end
+
+function ShowToNearestPlayers(aDocument)
+    ClearMenu()
+    local players_clean = GetNeareastPlayers()
+    CURRENT_DOCUMENT = aDocument
+    if #players_clean > 0 then
+        for i=1, #players_clean, 1 do
+            --local tmpObject = { pId = players_clean[i].playerId, pForm = aDocument }
+            Menu.addButton(players_clean[i].playerName .. "[" .. tostring(players_clean[i].playerId) .. "]", "ShowDocument", players_clean[i].playerId)
+        end
+    else
+
+        Menu.addButton("No players found", "CloseMenu", nil)
+    end
+
+    Menu.addButton("Go Back", "OpenFormPropertiesMenu", aDocument)
+    Menu.addButton("Close", "CloseMenu", nil)
+end
+
+function CopyToNearestPlayers(aDocument)
+    ClearMenu()
+    local players_clean = GetNeareastPlayers()
+    CURRENT_DOCUMENT = aDocument
+    if #players_clean > 0 then
+        for i=1, #players_clean, 1 do
+            
+            Menu.addButton(players_clean[i].playerName .. "[" .. tostring(players_clean[i].playerId) .. "]", "CopyFormToPlayer", players_clean[i].playerId)
+        end
+    else
+
+        Menu.addButton("No players found", "CloseMenu", nil)
+    end
+
+    Menu.addButton("Go Back", "OpenFormPropertiesMenu", aDocument)
+    Menu.addButton("Close", "CloseMenu", nil)
+end
+
+function OpenNewPublicFormMenu()
+    ClearMenu()
+    for i=1, #Config.Documents["public"], 1 do
+        Menu.addButton(Config.Documents["public"][i].headerTitle, "CreateNewForm", Config.Documents["public"][i])
+    end
+    Menu.addButton("Close","CloseMenu",nil) 
+    Menu.hidden = false
+end
+
+function OpenNewJobFormMenu()
+    ClearMenu()
+    PlayerData = ESX.GetPlayerData()
+    if Config.Documents[PlayerData.job.name] ~= nil then
+
+        for i=1, #Config.Documents[PlayerData.job.name], 1 do
+            Menu.addButton(Config.Documents[PlayerData.job.name][i].headerTitle, "CreateNewForm", Config.Documents[PlayerData.job.name][i])
+        end
+    end
+    Menu.addButton("Close","CloseMenu",nil) 
+    Menu.hidden = false
+end
+
+function OpenMyDocumentsMenu()
+    ClearMenu()
+    for i=#USER_DOCUMENTS, 1, -1 do
+
+        local date_created = ""
+        if USER_DOCUMENTS[i].data.headerDateCreated ~= nil then
+            date_created = USER_DOCUMENTS[i].data.headerDateCreated .. " - "
+        end
+
+        Menu.addButton(date_created .. USER_DOCUMENTS[i].data.headerTitle, "OpenFormPropertiesMenu", USER_DOCUMENTS[i])
+    end
+    Menu.addButton("Close", "CloseMenu", nil)
+    Menu.hidden = false
+end
+
+function OpenFormPropertiesMenu(aDocument)
+    ClearMenu()
+    Menu.addButton("View", "ViewDocument", aDocument.data)
+    Menu.addButton("Show", "ShowToNearestPlayers", aDocument.data)
+    Menu.addButton("Give Copy", "CopyToNearestPlayers", aDocument.data)
+    Menu.addButton("Delete", "OpenDeleteFormMenu", aDocument)
+    Menu.addButton("Go Back", "OpenMyDocumentsMenu", nil)
+    Menu.addButton("Close", "CloseMenu", nil)
+    Menu.hidden = false
+end
+
+function OpenDeleteFormMenu(aDocument)
+    ClearMenu()
+    Menu.addButton("Yes Delete", "DeleteDocument", aDocument)
+    Menu.addButton("Go Back", "OpenFormPropertiesMenu", aDocument)
+    Menu.addButton("Close", "CloseMenu", nil)
+    Menu.hidden = false
+end
+
+function CloseMenu()
+    ClearMenu()
+    Menu.hidden = true
+end
+
+
+function DeleteDocument(aDocument)
+    
+    local key_to_remove = nil
+
+    ESX.TriggerServerCallback('esx_documents:deleteDocument', function (cb)
+        if cb == true then
+            --remove form_close
+            for i=1, #USER_DOCUMENTS, 1 do
+                if USER_DOCUMENTS[i].id == aDocument.id then
+                    key_to_remove = i
+                end
+            end
+
+            if key_to_remove ~= nil then
+                table.remove(USER_DOCUMENTS, key_to_remove)
+            end
+            OpenMyDocumentsMenu()
+        end
+    end, aDocument.id)
+end
+
+function CreateNewForm(aDocument)
+
+    ESX.TriggerServerCallback('esx_documents:getPlayerDetails', function (cb_player_details)
+        if cb_player_details ~= nil then
+            --print("Received dump : " .. dump(cb_player_details))
+            SetNuiFocus(true, true)
+            aDocument.headerFirstName = cb_player_details.firstname
+            aDocument.headerLastName = cb_player_details.lastname
+            aDocument.headerDateOfBirth = cb_player_details.dateofbirth
+            aDocument.headerJobLabel = PlayerData.job.label;
+            aDocument.headerJobGrade = PlayerData.job.grade_label;
+
+            SendNUIMessage({
+                type = "createNewForm",
+                data = aDocument
+            })
+        else
+            print ("Received nil from newely created scale object.")
+        end
+    end, data)
+
+end
+
+function ShowDocument(aPlayer)
+        print("ssss: " .. dump(aPlayer))
+        TriggerServerEvent('esx_documents:ShowToPlayer', aPlayer, CURRENT_DOCUMENT)
+        CURRENT_DOCUMENT = nil
+        CloseMenu()
+end
+
+RegisterNetEvent('esx_documents:viewDocument')
+AddEventHandler('esx_documents:viewDocument', function( data )
+
+    ViewDocument(data)
+end)
+
+function ViewDocument(aDocument)
+    SetNuiFocus(true, true)
+    SendNUIMessage({
+        type = "ShowDocument",
+        data = aDocument
+    })
+end
+
+RegisterNetEvent('esx_documents:copyForm')
+AddEventHandler('esx_documents:copyForm', function( data )
+         print("dump: " .. dump(data))
+
+    table.insert(USER_DOCUMENTS, data)
+end)
+
+function CopyForm(aDocument)
+    --table.insert(USER_DOCUMENTS, aDocument)
+end
+
+function GetAllUserForms()
+
+    ESX.TriggerServerCallback('esx_documents:getPlayerDocuments', function (cb_forms)
+        if cb_forms ~= nil then
+            print("Received dump : " .. dump(cb_forms))
+            USER_DOCUMENTS = cb_forms
+        else
+            print ("Received nil from newely created scale object.")
+        end
+    end, data)
+
+end    
+
+
+RegisterNUICallback('form_close', function()
+    SetNuiFocus(false, false)
+end)
+
+RegisterNUICallback('form_submit', function(data, cb) 
+    print("received: " .. dump(data))
+    CloseMenu()
+    ESX.TriggerServerCallback('esx_documents:submitDocument', function (cb_form)
+        if cb_form ~= nil then
+            print("Received dump : " .. dump(cb_form))
+            table.insert(USER_DOCUMENTS, cb_form)
+            OpenFormPropertiesMenu(cb_form)
+        else
+            print ("Received nil from newely created scale object.")
+        end
+    end, data)
+
+    SetNuiFocus(false, false)
+
+end)
+
+
+function GetNeareastPlayers()
+    local playerPed = PlayerPedId()
+    local players, nearbyPlayer = ESX.Game.GetPlayersInArea(GetEntityCoords(playerPed), 3.0)
+    
+    local players_clean = {}  
+    local found_players = false    
+    
+    for i=1, #players, 1 do
+        if players[i] ~= PlayerId() then
+            found_players = true
+            table.insert(players_clean, {playerName = GetPlayerName(players[i]), playerId = GetPlayerServerId(players[i])} )
+        end
+    end
+    return players_clean
+end
+
+
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end

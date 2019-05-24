@@ -1,0 +1,19 @@
+Locales ['en'] = {
+  ['no_instance_active'] = 'You need to be inside an instance.',
+  ['plant_requirements'] = 'You need ~r~x2~w~ ventilators and ~r~x2~w~ lamps placed before you plant.',
+  ['weed_seed_planted'] = 'You just planted a weed pot.',
+  ['grow_pot_not_found'] = 'You don\'t have enough ~r~grow pots~w~. Go buy some.',
+  ['press_to_manage_plant'] = 'Press ~INPUT_CONTEXT~ to manage the plant.',
+  ['press_to_use_scale'] = 'Press ~INPUT_CONTEXT~ to use the scale.',
+  ['press_to_manage_ventilator'] = 'Press ~INPUT_CONTEXT~ to manage the ventilator.',
+  ['press_to_manage_lamp'] = 'Press ~INPUT_CONTEXT~ to manage the lamp.',
+  ['cannabis_seed_found'] = "You got 1x ~r~cannabis~w~ seed.",
+  ['remove_failure'] = "Remove ~r~failed~w~.",
+  ['remove_success'] = "You ~g~successfully~w~ removed the object.",
+  ['harvest_plant_failure'] = "Harvesting the plant ~r~failed~w~.",
+  ['harvest_plant_success'] = "You ~g~successfully~w~ harvested the plant and gained ~g~x%s~w~ raw cannabis.",
+  ['harvest_too_soon'] = "It\'s too ~r~soon~w~ to harvest this plant.",
+  ['20gram_not_enough_items'] = "You need at least ~r~x2~w~ 20gram bags and ~r~x1~w~marijuana to do that.",
+  ['20gram_weed_bag_full'] = "You ~r~can\'t~w~ carry any more 20 gram weed bags.",
+  ['20gram_weed_bag_success'] = "You created ~g~x2~w~ 20 gram ~g~weed~w~ bags."
+} 
