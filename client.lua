@@ -221,6 +221,7 @@ end
 
 function CreateNewForm(aDocument)
 
+    PlayerData = ESX.GetPlayerData()
     ESX.TriggerServerCallback('esx_documents:getPlayerDetails', function (cb_player_details)
         if cb_player_details ~= nil then
             --print("Received dump : " .. dump(cb_player_details))
