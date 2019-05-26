@@ -12,6 +12,13 @@ Config.Documents = {
 
 	["public"] = {
 		{
+			headerTitle = "ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ",
+			headerSubtitle = "Υπεύθυνη δήλωση πολίτη.",
+			elements = {
+				{ label = "ΠΕΡΙΕΧΟΜΕΝΟ ΔΗΛΩΣΗΣ", type = "textarea", value = "", can_be_emtpy = false },
+			}
+		},
+		{
 			headerTitle = "ΚΑΤΑΘΕΣΗ ΜΑΡΤΥΡΑ",
 			headerSubtitle = "Επίσημη κατάθεση μάρτυρα.",
 			elements = {
@@ -38,6 +45,16 @@ Config.Documents = {
 				{ label = "ΧΡΕΟΣ - ΠΟΣΟ", type = "input", value = "", can_be_empty = false },
 				{ label = "ΠΡΟΘΕΣΜΙΑ ΑΠΟΠΛΗΡΩΜΗΣ", type = "input", value = "", can_be_empty = false },
 				{ label = "ΑΛΛΕΣ ΠΛΗΡΟΦΟΡΙΕΣ", type = "textarea", value = "", can_be_emtpy = false },
+			}
+		},
+		{
+			headerTitle = "ΔΗΛΩΣΗ ΑΠΟΠΛΗΡΩΜΗΣ ΔΑΝΕΙΟΥ",
+			headerSubtitle = "Δήλωση χρέους απένταντι σε 3ο πρόσωπο.",
+			elements = {
+				{ label = "ΟΝΟΜΑ ΟΦΕΙΛΕΤΗ", type = "input", value = "", can_be_emtpy = false },
+				{ label = "ΕΠΙΘΕΤΟ ΟΦΕΙΛΕΤΗ", type = "input", value = "", can_be_emtpy = false },
+				{ label = "ΧΡΕΟΣ - ΠΟΣΟ", type = "input", value = "", can_be_empty = false },
+				{ label = "ΑΛΛΕΣ ΠΛΗΡΟΦΟΡΙΕΣ", type = "textarea", value = "ΔΗΛΩΝΩ ΥΠΕΥΘΥΝΑ ΟΤΙ Ο ΟΦΕΙΛΕΤΗΣ ΜΕ ΤΙΣ ΠΑΡΑΠΑΝΩ ΠΛΗΡΟΦΟΡΙΕΣ / ΣΤΟΙΧΕΙΑ ΠΡΟΧΩΡΗΣΕ ΣΕ ΑΠΟΠΛΗΡΩΜΗ ΤΟΥ ΑΝΑΦΕΡΟΜΕΝΟΥ ΧΡΕΟΥΣ.", can_be_emtpy = false, can_be_edited = false },
 			}
 		}
 	},
@@ -111,7 +128,29 @@ Config.Documents = {
 				{ label = "ΟΝΟΜΑ ΑΣΦΑΛΙΣΜΕΝΟΥ", type = "input", value = "", can_be_emtpy = false },
 				{ label = "ΕΠΙΘΕΤΟ ΑΣΦΑΛΙΣΜΕΝΟΥ", type = "input", value = "", can_be_emtpy = false },
 				{ label = "ΜΠΟΡΕΙ ΝΑ ΧΡΗΣ/ΘΕΙ ΕΩΣ", type = "input", value = "", can_be_empty = false },
-				{ label = "ΣΗΜΕΙΩΣΕΙΣ ΦΟΡΕΑ", type = "textarea", value = "Στον ανωτέρω υπό τα στοιχεία ασφαλιζόμενο, χορηγήθηκε άδεια χρήσης κάνναβης, για ιατρικούς σκοπούς και χρήση για καταπολέμηση δυνητικής πάθησης. Η άδεια χορηγήθηκε μετά από εξέταση εγκεκριμένου ιατρικού φορέα. Η χορηγούμενη και αδειοδοτούμενη ποσότητα που μπορεί να έχει στην κατοχή του ο ασθενής ΔΕΝ μπορεί να ξεπερνάει τις 10 σε αριθμό.", can_be_emtpy = false, can_be_edited = false },
+				{ label = "ΣΗΜΕΙΩΣΕΙΣ ΦΟΡΕΑ", type = "textarea", value = "Στον ανωτέρω υπό τα στοιχεία ασφαλιζόμενο, χορηγήθηκε άδεια χρήσης κάνναβης, για ιατρικούς σκοπούς και χρήση για καταπολέμηση δυνητικής πάθησης. Η άδεια χορηγήθηκε μετά από εξέταση εγκεκριμένου ιατρικού φορέα. Η χορηγούμενη και αδειοδοτούμενη ποσότητα που μπορεί να έχει στην κατοχή του ο ασθενής ΔΕΝ μπορεί να ξεπερνάει τα 100 γραμμάρια σε αριθμό.", can_be_emtpy = false, can_be_edited = false },
+			}
+		},
+		{
+			headerTitle = "ΓΝΩMAΤΕΥΣΗ ΝΟΗΤΙΚΗΣ ΣΤΕΡΗΣΗΣ",
+			headerSubtitle = "Επίσημη βεβαίωση - γνωμάτευση βαριάς νοητικής στέρησης.",
+			elements = {
+				{ label = "ΟΝΟΜΑ ΑΣΦΑΛΙΣΜΕΝΟΥ", type = "input", value = "", can_be_emtpy = false },
+				{ label = "ΕΠΙΘΕΤΟ ΑΣΦΑΛΙΣΜΕΝΟΥ", type = "input", value = "", can_be_emtpy = false },
+				{ label = "ΜΠΟΡΕΙ ΝΑ ΧΡΗΣ/ΘΕΙ ΕΩΣ", type = "input", value = "", can_be_empty = false },
+				{ label = "ΣΗΜΕΙΩΣΕΙΣ ΦΟΡΕΑ", type = "textarea", value = "ΒΕΒΑΙΩΝΟΥΜΕ ΟΤΙ Ο ΥΠΟ ΤΑ ΑΝΩΤΕΡΩ ΣΤΟΙΧΕΙΑ ΑΣΦΑΛΙΖΟΜΕΝΟΣ ΕΞΑΤΑΣΘΗΚΕ ΑΠΟ ΕΙΔΙΚΟ ΙΑΤΡΙΚΟ ΦΟΡΕΑ ΤΟΥ ΕΚΑΒ ΨΥΧΟΛΟΓΙΚΗΣ ΜΟΝΑΔΑΣ ΚΑΙ ΚΡΙΘΗΚΕ ΠΝΕΥΜΑΤΙΚΑ ΑΝΙΚΑΝΟΣ ΚΑΘΩΣ ΚΑΙ ΒΑΡΙΑ ΔΙΑΝΟΗΤΙΚΑ ΣΤΕΡΗΜΕΝΟΣ ΜΕ ΒΑΣΗ ΤΑ ΚΑΤΩΤΕΡΑ ΕΥΡΕΩΣ ΨΥΧΟΛΟΓΙΚΑ ΚΡΙΤΗΡΙΑ. Η ΠΑΡΟΥΣΑ ΒΕΒΑΙΩΣΗ ΜΠΟΡΕΙ ΝΑ ΧΡΗΣΙΜΟΠΟΙΗΘΕΙ ΕΩΣ ΟΤΟΥ ΤΗΝ ΑΝΑΦΕΡΟΜΕΝΗ ΛΗΞΗ ΤΗΣ", can_be_emtpy = false },
+			}
+		},
+	},
+	["avocat"] = {
+		{
+			headerTitle = "ΣΥΜΒΟΛΑΙΟ ΠΑΡΟΧΗΣ ΝΟΜΙΚΩΝ ΥΠΗΡΕΣΙΩΝ",
+			headerSubtitle = "Συμβόλαιο παροχής νομικών υπηρεσιών σε πολίτη.",
+			elements = {
+				{ label = "ΟΝΟΜΑ ΠΟΛΙΤΗ", type = "input", value = "", can_be_emtpy = false },
+				{ label = "ΕΠΙΘΕΤΟ ΠΟΛΙΤΗ", type = "input", value = "", can_be_emtpy = false },
+				{ label = "ΙΣΧΥΕΙ ΕΩΣ", type = "input", value = "", can_be_empty = false },
+				{ label = "ΒΕΒΑΙΩΣΗ", type = "textarea", value = "Το παρόν έγγραφο αποτελεί αποδεικτικό νομικής εκπροσώπησης και κάλυψης του αναφερόμενου πολίτη από τον πάροχο αυτού του εγγράφου. Η νομική κάλυψη που παρέχεται, έχει ισχύη έως την αναφερόμηνη ημερομηνία λήξης.", can_be_emtpy = false },
 			}
 		}
 	}
