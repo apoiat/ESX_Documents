@@ -4,6 +4,7 @@ local UI_MOUSE_FOCUS = false
 local USER_DOCUMENTS = {}
 local fontId
 local CURRENT_DOCUMENT = nil
+local DOCUMENT_FORMS = 
 
 local MENU_OPTIONS = {
     x = 0.5,
@@ -31,6 +32,7 @@ Citizen.CreateThread(function()
 
     PlayerData = ESX.GetPlayerData()
 
+    DOCUMENT_FORMS = _U["document_forms"]
 
     if Config.UseCustomFonts == true then
         RegisterFontFile(Config.CustomFontFile)
@@ -138,8 +140,8 @@ end
 
 function OpenNewPublicFormMenu()
     ClearMenu()
-    for i=1, #Config.Documents["public"], 1 do
-        Menu.addButton(Config.Documents["public"][i].headerTitle, "CreateNewForm", Config.Documents["public"][i])
+    for i=1, #DOCUMENT_FORMS["public"], 1 do
+        Menu.addButton(DOCUMENT_FORMS["public"][i].headerTitle, "CreateNewForm", DOCUMENT_FORMS["public"][i])
     end
     Menu.addButton("Close","CloseMenu",nil) 
     Menu.hidden = false
@@ -148,10 +150,10 @@ end
 function OpenNewJobFormMenu()
     ClearMenu()
     PlayerData = ESX.GetPlayerData()
-    if Config.Documents[PlayerData.job.name] ~= nil then
+    if DOCUMENT_FORMS[PlayerData.job.name] ~= nil then
 
-        for i=1, #Config.Documents[PlayerData.job.name], 1 do
-            Menu.addButton(Config.Documents[PlayerData.job.name][i].headerTitle, "CreateNewForm", Config.Documents[PlayerData.job.name][i])
+        for i=1, #DOCUMENT_FORMS[PlayerData.job.name], 1 do
+            Menu.addButton(DOCUMENT_FORMS[PlayerData.job.name][i].headerTitle, "CreateNewForm", DOCUMENT_FORMS[PlayerData.job.name][i])
         end
     end
     Menu.addButton("Close","CloseMenu",nil) 

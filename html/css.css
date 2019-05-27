@@ -266,6 +266,10 @@ input {
 	margin-right: 10px;
 	border:2px solid black;
 }
+.must_fill {
+	border:2px solid red;
+
+}
 /*
 input,textarea:focus {
 	font-family: 'Open Sans', sans-serif;

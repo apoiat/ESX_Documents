@@ -7,7 +7,7 @@ function InputElement(_label, _type, _value, _can_be_empty, _can_be_edited)
 	this.label 			= _label;
 	this.type 			= _type;
 	this.value 			= _value;
-	this.can_be_empty	= _can_be_empty || true;
+	this.can_be_empty	= _can_be_empty;
 	this.can_be_edited 	= _can_be_edited;
 
 	let _id = "_m" + String(id_count);
@@ -49,7 +49,7 @@ function Form (_title, _subtitle, _elements, _submittable)
 	this.headerDateCreated 	= "",
 
 	this.loadFromJson = function(obj) {
-		//obj = JSON.parse(obj);
+
 		this.headerTitle = obj.headerTitle;
 		this.headerSubtitle = obj.headerSubtitle;
 		this.headerFirstName = obj.headerFirstName;
@@ -81,23 +81,31 @@ function Form (_title, _subtitle, _elements, _submittable)
 	this.submit = function() { 
 
 		activeform.headerDateCreated = getCreationDate();
+
+		let can_submit = true;
+
 		for (let i=0; i<activeform.elements.length; i++)
 		{	
-			/*
+			
 			let _element = activeform.elements[i];
-			if (!_element.can_be_empty && (_element.val() == "" || _element.val() == " "))
+			if (!_element.can_be_empty && ( $("#" + _element.elementid).val() == "" || $("#" + _element.elementid).val() == " "))
 			{
-
+				can_submit = false;
+				$("#" + _element.elementid).addClass("must_fill");
+				//console.log("Element: " + _element)
 			}
-			*/
+			
 
 			activeform.elements[i].value = String($("#" + activeform.elements[i].elementid).val());
 		}
 
 		var json_string = JSON.stringify(activeform);
-		//console.log(json_string);
-		$.post('http://esx_documents/form_submit', json_string);
-		//alert("called submit!");
+		
+		if (can_submit) {
+			$.post('http://esx_documents/form_submit', json_string);
+			activeform.close();
+		}
+		
 	}
 
 	this.load = function() {}
@@ -112,30 +120,29 @@ function Form (_title, _subtitle, _elements, _submittable)
 		html_header += "<div id=\"header_title\">" + this.headerTitle + "</div>";
 		html_header += "<div id=\"header_seal\"></div>";
 		html_header += "<div id=\"header_details\"><h2>" + this.headerSubtitle + "</h2>";
-		html_header += "<div id=\"header_information_block\">ΠΛΗΡΟΦΟΡΙΕΣ</div>";
+		html_header += "<div id=\"header_information_block\">" + _U["title_information"] + "</div>";
 		html_header += "<div class=\"header_information_subblock\">";
-		html_header += "<h3>First Name:</h3>";
+		html_header += "<h3>" + _U["first_name"] + "</h3>";
 		html_header += "<h4>" + this.headerFirstName + "</h4>";
 		html_header += "</div>";
 		html_header += "<div class=\"header_information_subblock\">";
-		html_header += "<h3>Last Name:</h3>";
+		html_header += "<h3>" + _U["last_name"] + "</h3>";
 		html_header += "<h4>" + this.headerLastName + "</h4>";
 		html_header += "</div>";
 		html_header += "<div class=\"header_information_subblock\">";
-		html_header += "<h3>Birth Date:</h3>";
+		html_header += "<h3>" + _U["birth_date"] + "</h3>";
 		html_header += "<h4>" + this.headerDateOfBirth + "</h4>";
 		html_header += "</div>";
 		html_header += "<div class=\"header_information_subblock\">";
-		html_header += "<h3>Occupation:</h3>";
+		html_header += "<h3>" + _U["occupation"] + "</h3>";
 		html_header += "<h4>" + this.headerJobLabel + " </h4><h4> " + this.headerJobGrade + "</h4>";
 		html_header += "</div>";
 		html_header += "</div>";
 		html_header += "</div>";
-		html_header += "<div id=\"section_block\">ΣΥΜΠΛΗΡΩΣΤΕ ΤΑ ΠΑΡΑΚΑΤΩ ΣΤΟΙΧΕΙΑ</div>";
+		html_header += "<div id=\"section_block\">" + _U["title_fill_data"] + "</div>";
 		$("#main_container").append(html_header);
 
 		/* Create main body */
-
 
 		$("#main_container").append("<div id=\"section_input\"></div>");
 		
@@ -150,7 +157,8 @@ function Form (_title, _subtitle, _elements, _submittable)
 		}
 
 		/* Create footer */
-		html_footer = "<div id=\"section_footer_block\">ΟΡΟΙ & ΥΠΟΓΡΑΦΗ</div>";
+
+		html_footer = "<div id=\"section_footer_block\">" + _U["terms_and_signing"] + "</div>";
 		html_footer += "<div id=\"section_footer\">";
 		html_footer += "<div id=\"sign_terms_block\">";
 	
@@ -166,7 +174,8 @@ function Form (_title, _subtitle, _elements, _submittable)
 
 		
 
-		/* submit / cancel button */
+		/*  Cancel & Submit button */
+
 		if (this.submittable) {
 			html_footer += "<button id=\"button_cancel\" type=\"button\">Cancel</button>";
 			html_footer += "<button id=\"button_submit\" type=\"button\">Submit</button>";
@@ -178,7 +187,7 @@ function Form (_title, _subtitle, _elements, _submittable)
 
 		html_script = "<script>\
 		$(\"#signature_block\").on( \"click\", function() { activeform.sign(); }); \
-		$(\"#button_submit\").on( \"click\", function() { activeform.submit(); activeform.close(); }); \
+		$(\"#button_submit\").on( \"click\", function() { activeform.submit(); }); \
 		$(\"#button_close\").on( \"click\", function() { activeform.close(); }); \
 		</script>";
 
@@ -204,6 +213,7 @@ $(document).keyup(function(e) {
 
 
 window.addEventListener('message', function(event){
+
    	var edata = event.data;
    	if (edata.type == "ShowDocument") {
 
@@ -227,12 +237,6 @@ window.addEventListener('message', function(event){
    			display: 'block'
    		});
    	}
-
-   /*
-    if (edata.type == "click") {
-        triggerClick(cursorX - 1, cursorY - 1);
-    }
-    */
 
 });
 
@@ -264,11 +268,11 @@ $(document).ready(function(){
   var cursorY = documentHeight / 2;
 */
 
-	/*
+
 	var tmp = [
 	new InputElement("ΗΜΕΡΟΜΗΝΙΑ ΣΥΜΒΑΝΤΟΣ", "input", "432", false),
-	new InputElement("ΤΟΠΟΘΕΣΙΑ ΣΥΜΒΑΝΤΟΣ", "input", "321", false),
-	new InputElement("ΛΟΙΠΕΣ ΠΛΗΡΟΦΟΡΙΕΣ", "input", "123", false, false),
+	new InputElement("ΤΟΠΟΘΕΣΙΑ ΣΥΜΒΑΝΤΟΣ", "input", "", false),
+	new InputElement("ΛΟΙΠΕΣ ΠΛΗΡΟΦΟΡΙΕΣ", "input", "", true),
 	new InputElement("ΚΑΤΑΘΕΣΗ", "textarea", "12321313123131", false, false)
 	];
 	var tmp_form = new Form("ΚΑΤΑΘΕΣΗ", "Επίσημη κατάθεση μάρτυρα.", tmp);
@@ -276,49 +280,12 @@ $(document).ready(function(){
 	activeform.headerFirstName = "Alonzo";
 	activeform.headerLastName = "Perrero";
 	activeform.headerDateOfBirth = "25/08/1988";
+	activeform.submittable = true;
 	activeform.print();
 	
 	   		$("#main_container").css({
    			display: 'block'
    		});
-   		*/
+   		
    		
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* MOUSE MOVEMENT */
-/*
-$(document).mousemove(function(event) {
-    cursorX = event.pageX;
-    cursorY = event.pageY;
-
-	//$("#signature_block").text(cursorX);
-    UpdateCursorPos();
-});
-
-  function UpdateCursorPos() {
-      $('#cursor').css('left', cursorX);
-      $('#cursor').css('top', cursorY);
-  }
-
-function triggerClick(x, y) {
-      var element = $(document.elementFromPoint(x, y));
-      element.focus().click();
-      return true;
-}
-*/
