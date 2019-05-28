@@ -4,7 +4,7 @@ local UI_MOUSE_FOCUS = false
 local USER_DOCUMENTS = {}
 local fontId
 local CURRENT_DOCUMENT = nil
-local DOCUMENT_FORMS = 
+local DOCUMENT_FORMS = nil
 
 local MENU_OPTIONS = {
     x = 0.5,
@@ -32,7 +32,8 @@ Citizen.CreateThread(function()
 
     PlayerData = ESX.GetPlayerData()
 
-    DOCUMENT_FORMS = _U["document_forms"]
+    DOCUMENT_FORMS = Config.Documents[Config.Locale]
+    print(dump(DOCUMENT_FORMS))
 
     if Config.UseCustomFonts == true then
         RegisterFontFile(Config.CustomFontFile)

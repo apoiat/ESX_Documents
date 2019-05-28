@@ -1,8 +1,9 @@
 Locales['gr'] = {
   	['document_deleted'] = "Document was ~g~deleted~w~.",
   	['document_delete_failed'] = "Document delete ~r~failed~w~.",
+}
 
-  	["document_forms"] = {
+Config.Documents['gr'] = {
   		["public"] = {
 			{
 				headerTitle = "ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ",
@@ -148,5 +149,3 @@ Locales['gr'] = {
 			}
 		}
 	  }
-	}
-} 

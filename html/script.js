@@ -70,7 +70,6 @@ function Form (_title, _subtitle, _elements, _submittable)
 		this.signed = obj.signed;
 	}
 
-
 	this.sign = function () {
 		//alert("HMM?");
 		this.signed = true;
@@ -109,6 +108,7 @@ function Form (_title, _subtitle, _elements, _submittable)
 	}
 
 	this.load = function() {}
+	
 	this.givecopy = function () {}
 
 	this.print = function () { 
@@ -172,8 +172,6 @@ function Form (_title, _subtitle, _elements, _submittable)
 		html_footer += "</div>";
 		html_footer += "<div id=\"signature_block\">Click to sign.</div>";
 
-		
-
 		/*  Cancel & Submit button */
 
 		if (this.submittable) {
@@ -193,8 +191,6 @@ function Form (_title, _subtitle, _elements, _submittable)
 
 		$("#main_container").append(html_script);
 		if (this.signed) this.sign();
-
-
 	}
 
 	this.close = function() {
@@ -260,15 +256,8 @@ function getCreationDate()
 
 $(document).ready(function(){
 
-/*
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var cursor = $('#cursor');
-  var cursorX = documentWidth / 2;
-  var cursorY = documentHeight / 2;
-*/
-
-
+	// TEST FORM FOR BROWSER EDITING
+	/* 
 	var tmp = [
 	new InputElement("ΗΜΕΡΟΜΗΝΙΑ ΣΥΜΒΑΝΤΟΣ", "input", "432", false),
 	new InputElement("ΤΟΠΟΘΕΣΙΑ ΣΥΜΒΑΝΤΟΣ", "input", "", false),
@@ -286,6 +275,6 @@ $(document).ready(function(){
 	   		$("#main_container").css({
    			display: 'block'
    		});
-   		
+   		*/
    		
 });
