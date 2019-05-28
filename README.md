@@ -40,6 +40,7 @@ Put it in the `[esx]` directory
 
 ## Installation
 Import `esx_documents.sql` in your database
+
 Add this in your server.cfg :
 
 ```
