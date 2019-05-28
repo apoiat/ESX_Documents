@@ -13,24 +13,25 @@ Introducing Documents, a great roleplaying addition script for fivem servers usi
 
 ## Features
 The following document functions are available
-  * Create
-  * Sign
-  * Show
-  * Give Copy
-  * Delete
-  * Public documents
-  * Job specific documents
-  * Custom documents creation
-  * Localization (gr/en)
+* Create
+* Sign
+* Show
+* Give Copy
+* Delete
+* Public documents
+* Job specific documents
+* Custom documents creation
+* Localization (gr/en)
   
 ## Requirements
+* ESX framework
 
 ## Download & Installation
 
 ### Using Git
 ```
 cd resources
-git clone https://github.com/apoiat/esx_cargodelivery [esx]/esx_cargodelivery
+git clone https://github.com/apoiat/ESX_Documents [esx]/esx_documents
 ```
 
 ### Manually
@@ -38,6 +39,7 @@ Download https://github.com/apoiat/ESX_Documents/archive/master.zip
 Put it in the `[esx]` directory
 
 ## Installation
+Import `esx_documents.sql` in your database
 Add this in your server.cfg :
 
 ```
