@@ -116,7 +116,7 @@ function ShowToNearestPlayers(aDocument)
         Menu.addButton("No players found", "CloseMenu", nil)
     end
 
-    Menu.addButton("Go Back", "OpenFormPropertiesMenu", aDocument)
+    --Menu.addButton("Go Back", "OpenFormPropertiesMenu", aDocument)
     Menu.addButton("Close", "CloseMenu", nil)
 end
 
