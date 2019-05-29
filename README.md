@@ -4,14 +4,14 @@
 
 <img src="https://i.ibb.co/HtCtSgx/esx-documents.png" width="100%">
 
-[![npm version](https://img.shields.io/github/release/apoiat/ESX_Deliveries.svg?style=flat)](https://github.com/apoiat/ESX_Deliveries "View this project on npm")  [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![npm version](https://img.shields.io/github/release/apoiat/ESX_Documents.svg?style=flat)](https://github.com/apoiat/ESX_Deliveries "View this project on npm")  [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ____
 
 </div>
 
 
 ## Introduction
-Introducing Documents, a great roleplaying addition script for fivem servers using the esx framework. This script provides creation, signing, copying and displaying of documents to enrich players' roleplaying experience. Basically you have two type of documents:
+Introducing Documents, a great roleplaying addition script for fivem servers using the esx framework. <br>This script provides creation, signing, copying and displaying of documents to enrich players' roleplaying experience</b>. Basically you have two type of documents:
 * Public documents 
 
   * Affirmation form
