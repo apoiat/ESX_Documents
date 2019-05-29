@@ -3,11 +3,26 @@
 
 ## Introduction
 Introducing Documents, a great roleplaying addition script for fivem servers using the esx framework. This script provides creation, signing, copying and displaying of documents to enrich players' roleplaying experience. Basically you have two type of documents:
-* Public documents
+* Public documents 
+
+  * Affirmation form
+  * Witness testimony
+  * Vehicle convey statement
+  * Debt statement towards citizen
+  * Debt clearance decleration
 
   These are accessible by everyone and are mostly documents required by services or other jobs to be filled and signed by you for some purpose.
   
 * Job specific documents
+
+  * [police] Special parking permit
+  * [police] Gun permit
+  * [police] Clean citizen criminal record
+  * [ambulance] Medical report - pathology
+  * [ambulance] Medical report - psychology
+  * [ambulance] Medical report - eye specialist
+  * [ambulance] Marijuana use permit
+  * [avocat - lawyer] Legal services contract
 
   These are documents available only to assigned jobs and consist of documents that need to be filled and signed by people working that specific job. Examples are licenses, reports, permits 
 
