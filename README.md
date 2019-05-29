@@ -11,7 +11,7 @@ ____
 
 
 ## Introduction
-Introducing Documents, a great roleplaying addition script for fivem servers using the esx framework. <br>This script provides creation, signing, copying and displaying of documents to enrich players' roleplaying experience</b>. Basically you have two type of documents:
+Introducing Documents, a great roleplaying addition script for fivem servers using the esx framework. <b>This script provides creation, signing, copying and displaying of documents to enrich players' roleplaying experience</b>. Basically you have two type of documents:
 * Public documents 
 
   * Affirmation form
