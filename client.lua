@@ -68,7 +68,6 @@ Citizen.CreateThread(function()
         end
     
         if IsControlJustReleased(0, Config.MenuKey)  then
-            print("WTFFFF???")
             Menu.hidden = false
             OpenMainMenu()
             
