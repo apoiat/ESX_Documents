@@ -60,6 +60,7 @@ git clone https://github.com/apoiat/ESX_Documents [esx]/esx_documents
 
 ### Manually
 Download https://github.com/apoiat/ESX_Documents/archive/master.zip
+Rename folder to esx_documents
 Put it in the `[esx]` directory
 
 ## Installation
