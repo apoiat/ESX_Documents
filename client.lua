@@ -40,7 +40,7 @@ Citizen.CreateThread(function()
         fontId = RegisterFontId(Config.CustomFontId)
         MENU_OPTIONS.font = fontId
     else 
-        MENU_OPTIONS.font = 2
+        MENU_OPTIONS.font = 4
     end
     
 
