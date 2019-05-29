@@ -51,6 +51,8 @@ The following document functions are available
 * ESX framework
 
 ## Download & Installation
+> <b>Important note:</b> 
+Make sure your resource folder name is esx_documents. Anything else will make the script malfunction.
 
 ### Using Git
 ```
