@@ -223,12 +223,12 @@ window.addEventListener('message', function(event){
    		$.getScript("language_" + edata.data.locale + ".js", function(data, textStatus){
    			try {
         		activeform.print();
-        		console.log("we loaded language_gr.js");
+        		console.log("we loaded" + "language_" + edata.data.locale + ".js");
         		$("#main_container").css({
    					display: 'block'
    				});
     		} catch(e) {
-        		console.log("Hosted fonts failed to load: " + e);
+        		console.log("Error loading language: " + e);
     		}
 		});
 
@@ -243,12 +243,12 @@ window.addEventListener('message', function(event){
    		$.getScript("language_" + edata.data.locale + ".js", function(data, textStatus){
    			try {
         		activeform.print();
-        		console.log("we loaded language_gr.js");
+        		console.log("we loaded" + "language_" + edata.data.locale + ".js");
         		$("#main_container").css({
    					display: 'block'
    				});
     		} catch(e) {
-        		console.log("Hosted fonts failed to load: " + e);
+        		console.log("Error loading language: " + e);
     		}
 		});
 
