@@ -1,3 +1,4 @@
+
 var toggleShow = false;
 var activeform = {};
 var id_count = 0;
@@ -216,22 +217,41 @@ window.addEventListener('message', function(event){
    		activeform = new Form();
    		activeform.loadFromJson(edata.data);
    		activeform.submittable = false;
-   		activeform.print();
 
- 		$("#main_container").css({
-   			display: 'block'
-   		});
+   		if (edata.data.locale == undefined) edata.data.locale = "en";
+
+   		$.getScript("language_" + edata.data.locale + ".js", function(data, textStatus){
+   			try {
+        		activeform.print();
+        		console.log("we loaded language_gr.js");
+        		$("#main_container").css({
+   					display: 'block'
+   				});
+    		} catch(e) {
+        		console.log("Hosted fonts failed to load: " + e);
+    		}
+		});
+
+
    	}
 
    	if (edata.type == "createNewForm") {
    		activeform = new Form();
    		activeform.loadFromJson(edata.data);
    		activeform.submittable = true;
-   		activeform.print();
 
-   		$("#main_container").css({
-   			display: 'block'
-   		});
+   		$.getScript("language_" + edata.data.locale + ".js", function(data, textStatus){
+   			try {
+        		activeform.print();
+        		console.log("we loaded language_gr.js");
+        		$("#main_container").css({
+   					display: 'block'
+   				});
+    		} catch(e) {
+        		console.log("Hosted fonts failed to load: " + e);
+    		}
+		});
+
    	}
 
 });

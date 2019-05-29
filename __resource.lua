@@ -7,7 +7,8 @@ files {
 	'html/img/signature.png',
 	'html/img/cursor.png',
 	'html/css.css',
-	'html/language.js',
+	'html/language_en.js',
+	'html/language_gr.js',
 	'html/script.js',
 	'html/jquery-3.4.1.min.js',
 }

@@ -232,8 +232,9 @@ function CreateNewForm(aDocument)
             aDocument.headerFirstName = cb_player_details.firstname
             aDocument.headerLastName = cb_player_details.lastname
             aDocument.headerDateOfBirth = cb_player_details.dateofbirth
-            aDocument.headerJobLabel = PlayerData.job.label;
-            aDocument.headerJobGrade = PlayerData.job.grade_label;
+            aDocument.headerJobLabel = PlayerData.job.label
+            aDocument.headerJobGrade = PlayerData.job.grade_label
+            aDocument.locale = Config.Locale
 
             SendNUIMessage({
                 type = "createNewForm",
