@@ -1,6 +1,21 @@
 Locales['gr'] = {
   	['document_deleted'] = "Document was ~g~deleted~w~.",
   	['document_delete_failed'] = "Document delete ~r~failed~w~.",
+    ['copy_from_player'] = "You ~g~received~w~ a form copy from a player.",
+    ['from_copied_player'] = "Form ~g~copied~w~ to player",
+    ['could_not_copy_form_player'] = "Could ~r~not~w~ copy form to player.",
+    ['document_options'] = "Document Options",
+    ['public_documents'] = "Public Documents",
+    ['job_documents'] = "Job Documents",
+    ['saved_documents'] = "Saved Documents",
+    ['close_bt'] = "Close",
+    ['no_player_found'] = "No players found",
+    ['go_back'] = "Go Back",
+    ['view_bt'] = "View",
+    ['show_bt'] = "Show",
+    ['give_copy'] = "Give Copy",
+    ['delete_bt'] = "Delete",
+    ['yes_delete'] = "Yes Delete",
 }
 
 Config.Documents['gr'] = {

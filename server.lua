@@ -19,7 +19,7 @@ ESX.RegisterServerCallback('esx_documents:submitDocument', function(source, cb, 
         --local status_data = { item = "lamp", x = lamp_position.x, y = lamp_position.y, z = lamp_position.z, heading = lamp_heading }
 
         MySQL.Async.insert("INSERT INTO user_documents (owner, data) VALUES (@owner, @data)", {['@owner'] = playerId, ['@data'] = json.encode(data)}, function(id)
-            
+
             if id ~= nil then
                 MySQL.Async.fetchAll('SELECT * FROM user_documents where id = @id', {['@id']=id}, function (result)
                     --print("Trying to dump: " .. dump(result))
@@ -65,7 +65,7 @@ ESX.RegisterServerCallback('esx_documents:getPlayerDocuments', function(source, 
     local forms = {}
 
     MySQL.Async.fetchAll("SELECT * FROM user_documents WHERE owner = @owner", {['@owner'] = playerId}, function(result)
-        
+
         if #result > 0 then
 
             for i=1, #result, 1 do
@@ -90,7 +90,7 @@ ESX.RegisterServerCallback('esx_documents:getPlayerDetails', function(source, cb
     local cb_data = nil
 
     MySQL.Async.fetchAll("SELECT firstname, lastname, dateofbirth FROM users WHERE identifier = @owner", {['@owner'] = playerId}, function(result)
-        
+
         if result[1] ~= nil then
             cb_data = result[1]
             cb(cb_data)
@@ -118,7 +118,7 @@ AddEventHandler('esx_documents:CopyToPlayer', function(targetID, aForm)
     local _targetid = ESX.GetPlayerFromId(targetID).source
     local _aForm    = aForm
     local playerId  = getPlayerID(_targetid)
- 
+
     MySQL.Async.insert("INSERT INTO user_documents (owner, data) VALUES (@owner, @data)", {['@owner'] = playerId, ['@data'] = json.encode(aForm)}, function(id)
             if id ~= nil then
                 MySQL.Async.fetchAll('SELECT * FROM user_documents where id = @id', {['@id']=id}, function (result)
@@ -127,14 +127,14 @@ AddEventHandler('esx_documents:CopyToPlayer', function(targetID, aForm)
                         db_form = result[1]
                         db_form.data = json.decode(result[1].data)
                         TriggerClientEvent('esx_documents:copyForm', _targetid, db_form)
-                        TriggerClientEvent('esx:showNotification', _targetid, "You ~g~received~w~ a form copy from a player.")
-                        TriggerClientEvent('esx:showNotification', _source, "Form ~g~copied~w~ to player.")
+                        TriggerClientEvent('esx:showNotification', _targetid, _U('copy_from_player'))
+                        TriggerClientEvent('esx:showNotification', _source, _U('from_copied_player'))
                     else
-                        TriggerClientEvent('esx:showNotification', _source, "Could ~r~not~w~ copy form to player.")
+                        TriggerClientEvent('esx:showNotification', _source, _U('could_not_copy_form_player'))
                     end
                 end)
             else
-                TriggerClientEvent('esx:showNotification', _source, "Could ~r~not~w~ copy form to player.")
+                TriggerClientEvent('esx:showNotification', _source, _U('could_not_copy_form_player'))
             end
     end)
 

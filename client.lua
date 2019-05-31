@@ -14,7 +14,7 @@ local MENU_OPTIONS = {
     scale = 0.4,
     font = fontId,
     --menu_title = "Document Actions",
-    menu_subtitle = "Document Options",
+    menu_subtitle = _U('document_options'),
     color_r = 0,
     color_g = 128,
     color_b = 255,
@@ -39,10 +39,10 @@ Citizen.CreateThread(function()
         RegisterFontFile(Config.CustomFontFile)
         fontId = RegisterFontId(Config.CustomFontId)
         MENU_OPTIONS.font = fontId
-    else 
+    else
         MENU_OPTIONS.font = 4
     end
-    
+
 
     GetAllUserForms()
     SetNuiFocus(false, false)
@@ -56,21 +56,21 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-       
+
         if UI_MOUSE_FOCUS == true then
 
             --[[
             if IsControlJustReleased(0, 142) then -- MeleeAttackAlternate
                 --SendNUIMessage({type = "click"})
-                
+
             end
             --]]
         end
-    
+
         if IsControlJustReleased(0, Config.MenuKey)  then
             Menu.hidden = false
             OpenMainMenu()
-            
+
             --[[
             SetNuiFocus(true, true)
 			SendNUIMessage({
@@ -88,10 +88,10 @@ Citizen.CreateThread(function()
 
 function OpenMainMenu()
     ClearMenu()
-    Menu.addButton("Public Documents", "OpenNewPublicFormMenu", nil)
-    Menu.addButton("Job Documents", "OpenNewJobFormMenu", nil)
-    Menu.addButton("Saved Documents", "OpenMyDocumentsMenu", nil)
-    Menu.addButton("Close","CloseMenu",nil) 
+    Menu.addButton(_U('public_documents'), "OpenNewPublicFormMenu", nil)
+    Menu.addButton(_U('job_documents'), "OpenNewJobFormMenu", nil)
+    Menu.addButton(_U('saved_documents'), "OpenMyDocumentsMenu", nil)
+    Menu.addButton(_U('close_bt'), "CloseMenu", nil)
     Menu.hidden = false
 end
 
@@ -113,11 +113,11 @@ function ShowToNearestPlayers(aDocument)
         end
     else
 
-        Menu.addButton("No players found", "CloseMenu", nil)
+        Menu.addButton(_U('no_player_found'), "CloseMenu", nil)
     end
 
     --Menu.addButton("Go Back", "OpenFormPropertiesMenu", aDocument)
-    Menu.addButton("Close", "CloseMenu", nil)
+    Menu.addButton(_U('close_bt'), "CloseMenu", nil)
 end
 
 function CopyToNearestPlayers(aDocument)
@@ -126,16 +126,16 @@ function CopyToNearestPlayers(aDocument)
     CURRENT_DOCUMENT = aDocument
     if #players_clean > 0 then
         for i=1, #players_clean, 1 do
-            
+
             Menu.addButton(players_clean[i].playerName .. "[" .. tostring(players_clean[i].playerId) .. "]", "CopyFormToPlayer", players_clean[i].playerId)
         end
     else
 
-        Menu.addButton("No players found", "CloseMenu", nil)
+        Menu.addButton(_U('no_player_found'), "CloseMenu", nil)
     end
 
-    Menu.addButton("Go Back", "OpenFormPropertiesMenu", aDocument)
-    Menu.addButton("Close", "CloseMenu", nil)
+    Menu.addButton(_U('go_back'), "OpenFormPropertiesMenu", aDocument)
+    Menu.addButton(_U('close_bt'), "CloseMenu", nil)
 end
 
 function OpenNewPublicFormMenu()
@@ -143,7 +143,7 @@ function OpenNewPublicFormMenu()
     for i=1, #DOCUMENT_FORMS["public"], 1 do
         Menu.addButton(DOCUMENT_FORMS["public"][i].headerTitle, "CreateNewForm", DOCUMENT_FORMS["public"][i])
     end
-    Menu.addButton("Close","CloseMenu",nil) 
+    Menu.addButton(_U('close_bt'),"CloseMenu",nil)
     Menu.hidden = false
 end
 
@@ -156,7 +156,7 @@ function OpenNewJobFormMenu()
             Menu.addButton(DOCUMENT_FORMS[PlayerData.job.name][i].headerTitle, "CreateNewForm", DOCUMENT_FORMS[PlayerData.job.name][i])
         end
     end
-    Menu.addButton("Close","CloseMenu",nil) 
+    Menu.addButton(_U('close_bt'), "CloseMenu", nil)
     Menu.hidden = false
 end
 
@@ -171,26 +171,26 @@ function OpenMyDocumentsMenu()
 
         Menu.addButton(date_created .. USER_DOCUMENTS[i].data.headerTitle, "OpenFormPropertiesMenu", USER_DOCUMENTS[i])
     end
-    Menu.addButton("Close", "CloseMenu", nil)
+    Menu.addButton(_U('close_bt'), "CloseMenu", nil)
     Menu.hidden = false
 end
 
 function OpenFormPropertiesMenu(aDocument)
     ClearMenu()
-    Menu.addButton("View", "ViewDocument", aDocument.data)
-    Menu.addButton("Show", "ShowToNearestPlayers", aDocument.data)
-    Menu.addButton("Give Copy", "CopyToNearestPlayers", aDocument.data)
-    Menu.addButton("Delete", "OpenDeleteFormMenu", aDocument)
-    Menu.addButton("Go Back", "OpenMyDocumentsMenu", nil)
-    Menu.addButton("Close", "CloseMenu", nil)
+    Menu.addButton(_U('view_bt'), "ViewDocument", aDocument.data)
+    Menu.addButton(_U('show_bt'), "ShowToNearestPlayers", aDocument.data)
+    Menu.addButton(_U('give_copy'), "CopyToNearestPlayers", aDocument.data)
+    Menu.addButton(_U('delete_bt'), "OpenDeleteFormMenu", aDocument)
+    Menu.addButton(_U('go_back'), "OpenMyDocumentsMenu", nil)
+    Menu.addButton(_U('close_bt'), "CloseMenu", nil)
     Menu.hidden = false
 end
 
 function OpenDeleteFormMenu(aDocument)
     ClearMenu()
-    Menu.addButton("Yes Delete", "DeleteDocument", aDocument)
-    Menu.addButton("Go Back", "OpenFormPropertiesMenu", aDocument)
-    Menu.addButton("Close", "CloseMenu", nil)
+    Menu.addButton(_U('yes_delete'), "DeleteDocument", aDocument)
+    Menu.addButton(_U('go_back'), "OpenFormPropertiesMenu", aDocument)
+    Menu.addButton(_U('close_bt'), "CloseMenu", nil)
     Menu.hidden = false
 end
 
@@ -201,7 +201,7 @@ end
 
 
 function DeleteDocument(aDocument)
-    
+
     local key_to_remove = nil
 
     ESX.TriggerServerCallback('esx_documents:deleteDocument', function (cb)
@@ -289,14 +289,14 @@ function GetAllUserForms()
         end
     end, data)
 
-end    
+end
 
 
 RegisterNUICallback('form_close', function()
     SetNuiFocus(false, false)
 end)
 
-RegisterNUICallback('form_submit', function(data, cb) 
+RegisterNUICallback('form_submit', function(data, cb)
     print("received: " .. dump(data))
     CloseMenu()
     ESX.TriggerServerCallback('esx_documents:submitDocument', function (cb_form)
@@ -317,10 +317,10 @@ end)
 function GetNeareastPlayers()
     local playerPed = PlayerPedId()
     local players, nearbyPlayer = ESX.Game.GetPlayersInArea(GetEntityCoords(playerPed), 3.0)
-    
-    local players_clean = {}  
-    local found_players = false    
-    
+
+    local players_clean = {}
+    local found_players = false
+
     for i=1, #players, 1 do
         if players[i] ~= PlayerId() then
             found_players = true

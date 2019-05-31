@@ -12,7 +12,7 @@ ____
 
 ## Introduction
 Introducing Documents, a great roleplaying addition script for fivem servers using the esx framework. <b>This script provides creation, signing, copying and displaying of documents to enrich players' roleplaying experience</b>. Basically you have two type of documents:
-* Public documents 
+* Public documents
 
   * Affirmation form
   * Witness testimony
@@ -21,7 +21,7 @@ Introducing Documents, a great roleplaying addition script for fivem servers usi
   * Debt clearance decleration
 
   These are accessible by everyone and are mostly documents required by services or other jobs to be filled and signed by you for some purpose.
-  
+
 * Job specific documents
 
   * [police] Special parking permit
@@ -33,7 +33,7 @@ Introducing Documents, a great roleplaying addition script for fivem servers usi
   * [ambulance] Marijuana use permit
   * [avocat - lawyer] Legal services contract
 
-  These are documents available only to assigned jobs and consist of documents that need to be filled and signed by people working that specific job. Examples are licenses, reports, permits 
+  These are documents available only to assigned jobs and consist of documents that need to be filled and signed by people working that specific job. Examples are licenses, reports, permits
 
 ## Features
 The following document functions are available
@@ -46,12 +46,12 @@ The following document functions are available
 * Job specific documents
 * Custom documents creation
 * Localization (gr/en)
-  
+
 ## Requirements
 * ESX framework
 
 ## Download & Installation
-> <b>Important note:</b> 
+> <b>Important note:</b>
 Make sure your resource folder name is esx_documents. Anything else will make the script malfunction.
 
 ### Using Git
@@ -94,7 +94,7 @@ So let's see an example. Let's say we want to create a witness testimony documen
 <tr>
  <td width="30%"><img src="https://i.ibb.co/kx5G0vy/Untitled.png" width="100%"></td>
  <td width="70%">
-  
+
   ```
 -- We add our document to the public section
 -- Click the image on the left to see the code translation
@@ -114,4 +114,4 @@ So let's see an example. Let's say we want to create a witness testimony documen
 </tr>
 </table>
 
-
+Translations and implementation by [ESX-Brasil]('https://github.com/ESX-Brasil/')
