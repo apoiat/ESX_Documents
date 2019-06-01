@@ -1,8 +1,23 @@
 Locales['en'] = {
     ['document_deleted'] = "Document was ~g~deleted~w~.",
     ['document_delete_failed'] = "Document delete ~r~failed~w~.",
-
+    ['copy_from_player'] = "You ~g~received~w~ a form copy from a player.",
+    ['from_copied_player'] = "Form ~g~copied~w~ to player",
+    ['could_not_copy_form_player'] = "Could ~r~not~w~ copy form to player.",
+    ['document_options'] = "Document Options",
+    ['public_documents'] = "Public Documents",
+    ['job_documents'] = "Job Documents",
+    ['saved_documents'] = "Saved Documents",
+    ['close_bt'] = "Close",
+    ['no_player_found'] = "No players found",
+    ['go_back'] = "Go Back",
+    ['view_bt'] = "View",
+    ['show_bt'] = "Show",
+    ['give_copy'] = "Give Copy",
+    ['delete_bt'] = "Delete",
+    ['yes_delete'] = "Yes Delete",
 }
+
 Config.Documents['en'] = {
       ["public"] = {
         {
@@ -49,7 +64,7 @@ Config.Documents['en'] = {
             { label = "DEBTOR LASTNAME", type = "input", value = "", can_be_emtpy = false },
             { label = "DEBT AMOUNT", type = "input", value = "", can_be_empty = false },
             { label = "OTHERINFORMATION", type = "textarea", value = "I HEREBY DECLARE THAT THE AFOREMENTIONED CITIZEN HAS COMPLETED A PAYMENT WITH THE AFOREMENTIONED DEBT AMOUNT", can_be_emtpy = false, can_be_edited = false },
-          } 
+          }
         }
       },
       ["police"] = {
@@ -61,7 +76,7 @@ Config.Documents['en'] = {
             { label = "HOLDER LASTNAME", type = "input", value = "", can_be_emtpy = false },
             { label = "VALID UNTIL", type = "input", value = "", can_be_empty = false },
             { label = "INFORMATION", type = "textarea", value = "THE AFOREMENTIONED CITIZEN HAS BEEN GRANTED UNLIMITED PARKING PERMIT IN EVERY CITY ZONE AND IS VALID UNTIL THE AFOREMENTIONED EXPIRATION DATE.", can_be_emtpy = false },
-          } 
+          }
         },
         {
           headerTitle = "GUN PERMIT",
@@ -71,7 +86,7 @@ Config.Documents['en'] = {
             { label = "HOLDER LASTNAME", type = "input", value = "", can_be_emtpy = false },
             { label = "VALID UNTIL", type = "input", value = "", can_be_empty = false },
             { label = "INFORMATION", type = "textarea", value = "THE AFOREMENTIONED CITIZEN IS ALLOWED AND GRANTED A GUN PERMIT WHICH WILL BE VALID UNTIL THE AFOREMENTIONED EXPIRATION DATE.", can_be_emtpy = false },
-          } 
+          }
         },
         {
           headerTitle = "CLEAN CITIZEN CRIMINAL RECORD",
@@ -102,7 +117,7 @@ Config.Documents['en'] = {
             { label = "INSURED LASTNAME", type = "input", value = "", can_be_emtpy = false },
             { label = "VALID UNTIL", type = "input", value = "", can_be_empty = false },
             { label = "MEDICAL NOTES", type = "textarea", value = "THE AFOREMENTIONED INSURED CITIZEN WAS TESTED BY A HEALTHCARE OFFICIAL AND DETERMINED MENTALLY HEALTHY BY THE LOWEST APPROVED PSYCHOLOGY STANDARDS. THIS REPORT IS VALID UNTIL THE AFOREMENTIONED EXPIRATION DATE.", can_be_emtpy = false },
-          } 
+          }
         },
         {
           headerTitle = "MEDICAL REPORT - EYE SPECIALIST",
@@ -134,7 +149,7 @@ Config.Documents['en'] = {
             { label = "CITIZEN LASTNAME", type = "input", value = "", can_be_emtpy = false },
             { label = "VALID UNTIL", type = "input", value = "", can_be_empty = false },
             { label = "INFORMATION", type = "textarea", value = "THIS DOCUMENT IS PROOF OF LEGAL REPRESANTATION AND COVERAGE OF THE AFOREMENTIONED CITIZEN. LEGAL SERVICES ARE VALID UNTIL THE AFOREMENTIONED EXPIRATION DATE.", can_be_emtpy = false },
-          } 
+          }
         }
       }
     }
