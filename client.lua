@@ -67,7 +67,7 @@ Citizen.CreateThread(function()
             --]]
         end
 
-        if IsControlJustReleased(0, Config.MenuKey)  then
+        if IsControlJustReleased(0, Config.MenuKey) and GetLastInputMethod(2) then
             Menu.hidden = false
             OpenMainMenu()
 
