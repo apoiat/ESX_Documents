@@ -45,7 +45,7 @@ The following document functions are available
 * Public documents
 * Job specific documents
 * Custom documents creation
-* Localization (gr/en)
+* Localization (gr/en/br)
 
 ## Requirements
 * ESX framework
