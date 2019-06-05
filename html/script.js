@@ -188,6 +188,7 @@ function Form (_title, _subtitle, _elements, _submittable)
 		$(\"#signature_block\").on( \"click\", function() { activeform.sign(); }); \
 		$(\"#button_submit\").on( \"click\", function() { activeform.submit(); }); \
 		$(\"#button_close\").on( \"click\", function() { activeform.close(); }); \
+		$(\"#button_cancel\").on( \"click\", function() { activeform.close(); }); \
 		</script>";
 
 		$("#main_container").append(html_script);
