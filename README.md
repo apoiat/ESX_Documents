@@ -115,4 +115,5 @@ So let's see an example. Let's say we want to create a witness testimony documen
 </table>
 
 Translations and implementation by [ESX-Brasil]('https://github.com/ESX-Brasil/')
+
 Special thanks to fivem user Max_Muller for providing a German translation.
