@@ -10,6 +10,7 @@ files {
 	'html/language_en.js',
 	'html/language_gr.js',
 	'html/language_br.js',
+	'html/language_de.js',
 	'html/script.js',
 	'html/jquery-3.4.1.min.js',
 }
@@ -21,6 +22,7 @@ server_scripts {
 	'locales/gr.lua',
 	'locales/en.lua',
 	'locales/br.lua',
+	'locales/de.lua',
 	'server.lua',
 }
 
@@ -30,6 +32,7 @@ client_scripts {
 	'locales/gr.lua',
 	'locales/en.lua',
 	'locales/br.lua',
+	'locales/de.lua',
 	'GUI.lua',
 	'client.lua',
 }
