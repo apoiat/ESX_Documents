@@ -45,7 +45,7 @@ The following document functions are available
 * Public documents
 * Job specific documents
 * Custom documents creation
-* Localization (gr/en/br)
+* Localization (gr/en/br/de)
 
 ## Requirements
 * ESX framework
@@ -115,3 +115,4 @@ So let's see an example. Let's say we want to create a witness testimony documen
 </table>
 
 Translations and implementation by [ESX-Brasil]('https://github.com/ESX-Brasil/')
+Special thanks to fivem user Max_Muller for providing a German translation.
