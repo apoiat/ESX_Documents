@@ -166,3 +166,4 @@ Config.Documents['de'] = {
       }
     }
   }
+}
