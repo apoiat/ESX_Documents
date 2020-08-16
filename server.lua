@@ -111,9 +111,8 @@ RegisterServerEvent('esx_documents:CopyToPlayer')
 AddEventHandler('esx_documents:CopyToPlayer', function(targetID, aForm)
 
     local _source   = source
-
     local _targetid = ESX.GetPlayerFromId(targetID).source
-    local targetxPlayer = ESX.GetPlayerFromId(targetID)
+    local targetxPlayer = ESX.GetPlayerFromId(_targetid)
     local _aForm    = aForm
 
     MySQL.Async.insert("INSERT INTO user_documents (owner, data) VALUES (@owner, @data)", {['@owner'] = targetxPlayer.identifier, ['@data'] = json.encode(aForm)}, function(id)
