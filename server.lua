@@ -142,8 +142,8 @@ end)
 
 
 function getPlayerID(source)
-    local identifiers = GetPlayerIdentifiers(source)
-    local player = getIdentifiant(identifiers)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local player = xPlayer.identifier
     return player
 end
 function getIdentifiant(id)
