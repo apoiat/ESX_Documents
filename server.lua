@@ -61,24 +61,24 @@ end)
 ESX.RegisterServerCallback('esx_documents:getPlayerDocuments', function(source, cb)
     local xPlayer = ESX.GetPlayerFromId(source)
     local forms = {}
+    if xPlayer ~= nil then
+        MySQL.Async.fetchAll("SELECT * FROM user_documents WHERE owner = @owner", {['@owner'] = xPlayer.identifier}, function(result)
 
-    MySQL.Async.fetchAll("SELECT * FROM user_documents WHERE owner = @owner", {['@owner'] = xPlayer.identifier}, function(result)
+           if #result > 0 then
 
-        if #result > 0 then
+                for i=1, #result, 1 do
 
-            for i=1, #result, 1 do
+                    local tmp_result = result[i]
+                    tmp_result.data = json.decode(result[i].data)
 
-                local tmp_result = result[i]
-                tmp_result.data = json.decode(result[i].data)
-
-                table.insert(forms, tmp_result)
+                    table.insert(forms, tmp_result)
                 --print(dump(tmp_result))
+                end
+                cb(forms)
             end
-            cb(forms)
-        end
 
     end)
-
+    end
 end)
 
 
