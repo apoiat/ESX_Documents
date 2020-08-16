@@ -33,7 +33,7 @@ Citizen.CreateThread(function()
     PlayerData = ESX.GetPlayerData()
 
     DOCUMENT_FORMS = Config.Documents[Config.Locale]
-    print(dump(DOCUMENT_FORMS))
+    --print(dump(DOCUMENT_FORMS))
 
     if Config.UseCustomFonts == true then
         RegisterFontFile(Config.CustomFontFile)
@@ -247,7 +247,7 @@ function CreateNewForm(aDocument)
 end
 
 function ShowDocument(aPlayer)
-        print("ssss: " .. dump(aPlayer))
+     --   print("ssss: " .. dump(aPlayer))
         TriggerServerEvent('esx_documents:ShowToPlayer', aPlayer, CURRENT_DOCUMENT)
         CURRENT_DOCUMENT = nil
         CloseMenu()
@@ -269,7 +269,7 @@ end
 
 RegisterNetEvent('esx_documents:copyForm')
 AddEventHandler('esx_documents:copyForm', function( data )
-         print("dump: " .. dump(data))
+       --  print("dump: " .. dump(data))
 
     table.insert(USER_DOCUMENTS, data)
 end)
@@ -282,7 +282,7 @@ function GetAllUserForms()
 
     ESX.TriggerServerCallback('esx_documents:getPlayerDocuments', function (cb_forms)
         if cb_forms ~= nil then
-            print("Received dump : " .. dump(cb_forms))
+         --   print("Received dump : " .. dump(cb_forms))
             USER_DOCUMENTS = cb_forms
         else
             print ("Received nil from newely created scale object.")
@@ -297,11 +297,11 @@ RegisterNUICallback('form_close', function()
 end)
 
 RegisterNUICallback('form_submit', function(data, cb)
-    print("received: " .. dump(data))
+   -- print("received: " .. dump(data))
     CloseMenu()
     ESX.TriggerServerCallback('esx_documents:submitDocument', function (cb_form)
         if cb_form ~= nil then
-            print("Received dump : " .. dump(cb_form))
+            --print("Received dump : " .. dump(cb_form))
             table.insert(USER_DOCUMENTS, cb_form)
             OpenFormPropertiesMenu(cb_form)
         else
