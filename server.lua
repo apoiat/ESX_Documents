@@ -11,14 +11,13 @@ ESX.RegisterServerCallback('esx_documents:submitDocument', function(source, cb, 
     local xPlayer = ESX.GetPlayerFromId(source)
     local db_form = nil;
     local _data = data;
-        local playerId = getPlayerID(source)
         --local owners = {}
         --table.insert(owners, playerId)
 
         --print(data)
         --local status_data = { item = "lamp", x = lamp_position.x, y = lamp_position.y, z = lamp_position.z, heading = lamp_heading }
 
-        MySQL.Async.insert("INSERT INTO user_documents (owner, data) VALUES (@owner, @data)", {['@owner'] = playerId, ['@data'] = json.encode(data)}, function(id)
+        MySQL.Async.insert("INSERT INTO user_documents (owner, data) VALUES (@owner, @data)", {['@owner'] = xPlayer.identifier, ['@data'] = json.encode(data)}, function(id)
 
             if id ~= nil then
                 MySQL.Async.fetchAll('SELECT * FROM user_documents where id = @id', {['@id']=id}, function (result)
@@ -38,12 +37,12 @@ end)
 ESX.RegisterServerCallback('esx_documents:deleteDocument', function(source, cb, id)
 
     local db_document = nil;
-    local playerId = getPlayerID(source)
+    local xPlayer = ESX.GetPlayerFromId(source)
 
     MySQL.Async.execute('DELETE FROM user_documents WHERE id = @id AND owner = @owner',
     {
         ['@id']  = id,
-        ['@owner'] = playerId
+        ['@owner'] = xPlayer.identifier
     }, function(rowsChanged)
 
         if rowsChanged >= 1 then
@@ -60,36 +59,34 @@ end)
 
 
 ESX.RegisterServerCallback('esx_documents:getPlayerDocuments', function(source, cb)
-
-    local playerId = getPlayerID(source)
+    local xPlayer = ESX.GetPlayerFromId(source)
     local forms = {}
+    if xPlayer ~= nil then
+        MySQL.Async.fetchAll("SELECT * FROM user_documents WHERE owner = @owner", {['@owner'] = xPlayer.identifier}, function(result)
 
-    MySQL.Async.fetchAll("SELECT * FROM user_documents WHERE owner = @owner", {['@owner'] = playerId}, function(result)
+           if #result > 0 then
 
-        if #result > 0 then
+                for i=1, #result, 1 do
 
-            for i=1, #result, 1 do
+                    local tmp_result = result[i]
+                    tmp_result.data = json.decode(result[i].data)
 
-                local tmp_result = result[i]
-                tmp_result.data = json.decode(result[i].data)
-
-                table.insert(forms, tmp_result)
+                    table.insert(forms, tmp_result)
                 --print(dump(tmp_result))
+                end
+                cb(forms)
             end
-            cb(forms)
-        end
 
     end)
-
+    end
 end)
 
 
 ESX.RegisterServerCallback('esx_documents:getPlayerDetails', function(source, cb)
-
-    local playerId = getPlayerID(source)
+    local xPlayer = ESX.GetPlayerFromId(source)
     local cb_data = nil
 
-    MySQL.Async.fetchAll("SELECT firstname, lastname, dateofbirth FROM users WHERE identifier = @owner", {['@owner'] = playerId}, function(result)
+    MySQL.Async.fetchAll("SELECT firstname, lastname, dateofbirth FROM users WHERE identifier = @owner", {['@owner'] = xPlayer.identifier}, function(result)
 
         if result[1] ~= nil then
             cb_data = result[1]
@@ -114,12 +111,11 @@ RegisterServerEvent('esx_documents:CopyToPlayer')
 AddEventHandler('esx_documents:CopyToPlayer', function(targetID, aForm)
 
     local _source   = source
-
     local _targetid = ESX.GetPlayerFromId(targetID).source
+    local targetxPlayer = ESX.GetPlayerFromId(_targetid)
     local _aForm    = aForm
-    local playerId  = getPlayerID(_targetid)
 
-    MySQL.Async.insert("INSERT INTO user_documents (owner, data) VALUES (@owner, @data)", {['@owner'] = playerId, ['@data'] = json.encode(aForm)}, function(id)
+    MySQL.Async.insert("INSERT INTO user_documents (owner, data) VALUES (@owner, @data)", {['@owner'] = targetxPlayer.identifier, ['@data'] = json.encode(aForm)}, function(id)
             if id ~= nil then
                 MySQL.Async.fetchAll('SELECT * FROM user_documents where id = @id', {['@id']=id}, function (result)
                     --print("Trying to dump: " .. dump(result))
@@ -139,19 +135,6 @@ AddEventHandler('esx_documents:CopyToPlayer', function(targetID, aForm)
     end)
 
 end)
-
-
-function getPlayerID(source)
-    local identifiers = GetPlayerIdentifiers(source)
-    local player = getIdentifiant(identifiers)
-    return player
-end
-function getIdentifiant(id)
-    for _, v in ipairs(id) do
-        return v
-    end
-end
-
 
 function dump(o)
    if type(o) == 'table' then
