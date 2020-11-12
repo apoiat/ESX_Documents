@@ -1,4 +1,4 @@
-fx_version 'adamant '
+fx_version 'adamant'
 game 'gta5'
 
 ui_page 'html/form.html'
