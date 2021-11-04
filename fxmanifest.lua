@@ -1,5 +1,9 @@
-fx_version 'adamant '
+fx_version 'cerulean'
 game 'gta5'
+
+author 'Apoiat'
+description 'Document script | A document script for FiveM: Write / delete / sign documents | Copy documents to other people | connected to a database | ESX'
+version '1.1'
 
 ui_page 'html/form.html'
 
