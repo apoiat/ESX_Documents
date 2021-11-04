@@ -343,3 +343,12 @@ function dump(o)
       return tostring(o)
    end
 end
+
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(playerData)
+    if playerData then
+        GetAllUserForms()
+    end
+    GetAllUserForms()
+
+end)
